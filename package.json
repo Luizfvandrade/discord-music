@@ -21,8 +21,10 @@
   },
   "homepage": "https://github.com/Luizfvandrade/discord-music#readme",
   "dependencies": {
+    "@discordjs/opus": "^0.5.0",
     "discord.js": "^12.5.3",
     "dotenv": "^8.2.0",
+    "opusscript": "0.0.8",
     "yt-search": "^2.8.0",
     "ytdl-core": "^4.5.0"
   },

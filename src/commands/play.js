@@ -7,24 +7,20 @@ module.exports = {
     name: 'music',
     aliases: ['play', 'skip', 'stop'],
     async execute(message, args, command, client, Discord){
-        console.log({
-            messageContent: message.content,
-            command: command,
-        })
-
+       
         const cmd = message.content.split('!').pop()
         const command_name = cmd.split(' ').shift()
 
         const voice_channel = message.member.voice.channel;
-        if (!voice_channel) return message.channel.send('You need to be in a channel to execute this command!');
+        if (!voice_channel) return message.channel.send('Você precisa estar em um canal para executar este comando!');
         const permissions = voice_channel.permissionsFor(message.client.user);
-        if (!permissions.has('CONNECT')) return message.channel.send('You dont have the correct permissins');
-        if (!permissions.has('SPEAK')) return message.channel.send('You dont have the correct permissins');
+        if (!permissions.has('CONNECT')) return message.channel.send('Você não tem as permissões corretas!');
+        if (!permissions.has('SPEAK')) return message.channel.send('Você não tem as permissões corretas!');
 
         const server_queue = queue.get(message.guild.id);
 
         if (command_name === 'play'){
-            if (!args.length) return message.channel.send('You need to send the second argument!');
+            if (!args.length) return message.channel.send('Você precisa enviar o segundo argumento!');
             let song = {};
 
             if (ytdl.validateURL(args[0])) {
@@ -62,12 +58,12 @@ module.exports = {
                     video_player(message.guild, queue_constructor.songs[0]);
                 } catch (err) {
                     queue.delete(message.guild.id);
-                    message.channel.send('There was an error connecting!');
+                    message.channel.send('Ocorreu um erro ao conectar!');
                     throw err;
                 }
             } else{
                 server_queue.songs.push(song);
-                return message.channel.send(`👍 **${song.title}** added to queue!`);
+                return message.channel.send(`👍 **${song.title}** adicionado à fila!`);
             }
         }
 
@@ -91,19 +87,19 @@ const video_player = async (guild, song) => {
         song_queue.songs.shift();
         video_player(guild, song_queue.songs[0]);
     });
-    await song_queue.text_channel.send(`🎶 Now playing **${song.title}**`)
+    await song_queue.text_channel.send(`🎶 Tocando agora **${song.title}**`)
 }
 
 const skip_song = (message, server_queue) => {
-    if (!message.member.voice.channel) return message.channel.send('You need to be in a channel to execute this command!');
+    if (!message.member.voice.channel) return message.channel.send('Você precisa estar em um canal para executar este comando!');
     if(!server_queue){
-        return message.channel.send(`There are no songs in queue 😔`);
+        return message.channel.send(`Não há músicas na fila 😔`);
     }
     server_queue.connection.dispatcher.end();
 }
 
 const stop_song = (message, server_queue) => {
-    if (!message.member.voice.channel) return message.channel.send('You need to be in a channel to execute this command!');
+    if (!message.member.voice.channel) return message.channel.send('Você precisa estar em um canal para executar este comando!');
     server_queue.songs = [];
     server_queue.connection.dispatcher.end();
 }
