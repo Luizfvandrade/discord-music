@@ -1,0 +1,32 @@
+{
+  "name": "discord-music",
+  "version": "1.0.0",
+  "description": "A simple music bot for Discord, where you can choose a music to hear during your daily study or work.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon .",
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Luizfvandrade/discord-music.git"
+  },
+  "keywords": [
+    "discordjs"
+  ],
+  "author": "Lzpp3",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Luizfvandrade/discord-music/issues"
+  },
+  "homepage": "https://github.com/Luizfvandrade/discord-music#readme",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "dotenv": "^8.2.0",
+    "yt-search": "^2.8.0",
+    "ytdl-core": "^4.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
